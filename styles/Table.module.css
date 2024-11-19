@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@700&family=Marhey:wght@300..700&display=swap');
+
+.header {
+  margin-bottom: 30px; /* Adjust the value as needed */
+  font-size: 25px;
+  font-family: 'Marhey', sans-serif;
+}
+
+.centered {
+  text-align: center;
+}
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  direction: rtl; /* This changes the direction of the container */
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  direction: rtl; /* This changes the direction of the table */
+
+  text-align: center;
+  font-family: 'Marhey', sans-serif;
+}
+
+.table th,
+.table td {
+  padding: 8px 12px;
+
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
