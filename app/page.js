@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/front.module.css';
 import Link from 'next/link';
+import Navbar from '../components/navbar';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <meta name="description" content="Your school website description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
 
       {/* Header Section */}
       <section className={styles.header}>

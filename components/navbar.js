@@ -15,7 +15,10 @@ const Navbar = () => {
           <Link href="/students/first-year">الصف الأول</Link>
         </li>
         <li>
-          <Link href="/students/">الرئيسية</Link>
+          <Link href="/students/">الصفوف</Link>
+        </li>
+        <li>
+          <Link href="/">الرئيسية</Link>
         </li>
       </ul>
     </nav>
