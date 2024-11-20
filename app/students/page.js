@@ -54,6 +54,7 @@ export default function Students() {
           <h2>طلاب الصف الثالث</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit....</p>
           <Image
+            className={styles.info}
             src="/images/third.jpg"
             alt="Third Year Image"
             width={300}
@@ -64,7 +65,7 @@ export default function Students() {
 
       {/* Footer Section */}
       <footer className={styles.footer}>
-        <p>&copy; Your School Name 2024</p>
+        <p>&copy; 2024 فاطمة الزهراء الثانوية للبنات</p>
         <p>Prog/Ashraf Eltayb</p>
       </footer>
     </div>

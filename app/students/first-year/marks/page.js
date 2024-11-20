@@ -20,6 +20,7 @@ export default async function Home() {
           <thead>
             <tr>
               <th>FullName</th>
+              <th>Class</th>
               <th>Course</th>
               <th>Total</th>
             </tr>
@@ -29,6 +30,7 @@ export default async function Home() {
               dataRows.map((row, index) => (
                 <tr key={index}>
                   <td>{row.FullName}</td>
+                  <td>{row.Room}</td>
                   <td>{row.Course}</td>
                   <td>{row.Total}</td>
                 </tr>

@@ -1,12 +1,43 @@
 'use client'; // Add this at the very top of your file
+
 import Head from 'next/head';
 import Link from 'next/link';
 import Navbar from '../../../components/navbar';
 import styles from '../../../styles/FirstYear.module.css';
-import { useState } from 'react';
+import styles2 from '../../../styles/Table.module.css';
+import { useState, useEffect } from 'react';
 
-export default function FirstYear() {
-  const [selectedSubject, setSelectedSubject] = useState('2-1');
+export default function SecondYear() {
+  const [selectedSubject, setSelectedSubject] = useState('الثاني/أول');
+  const [dataRows, setDataRows] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        console.log(`Fetching data for grade: ${selectedSubject}`);
+        const response = await fetch(`/api/sheets?Room=${selectedSubject}`);
+
+        // Log the entire response for debugging
+        console.log('Fetch Response:', response);
+
+        if (!response.ok) {
+          throw new Error(
+            `Network response was not ok: ${response.status} - ${response.statusText}`
+          );
+        }
+
+        const data = await response.json();
+        console.log('Fetched Data:', data);
+        setDataRows(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('Failed to fetch data. Please try again.');
+      }
+    }
+
+    fetchData();
+  }, [selectedSubject]);
 
   const handleSelectChange = (event) => {
     setSelectedSubject(event.target.value);
@@ -18,19 +49,17 @@ export default function FirstYear() {
         <title>طلاب الصف الثاني</title>
         <meta
           name="description"
-          content="Information about first year students"
+          content="Information about second year students"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Navbar />
 
-      {/* Header Section */}
       <section className={styles.header}>
         <h1>طلاب الصف الثاني</h1>
       </section>
 
-      {/* Dropdown Menu */}
       <section className={styles.dropdown}>
         <label htmlFor="subjects">Choose a Class:</label>
         <select
@@ -38,31 +67,44 @@ export default function FirstYear() {
           value={selectedSubject}
           onChange={handleSelectChange}
         >
-          <option value="2-1">2-1</option>
-          <option value="2-2">2-2</option>
-          <option value="2-3">2-3</option>
-          <option value="2-4">2-4</option>
-          <option value="2-5">2-5</option>
-          <option value="2-6">2-6</option>
-          <option value="2-7">2-7</option>
+          <option value="الثاني/أول">الثاني/أول</option>{' '}
+          <option value="الثاني/ثاني">الثاني/ثاني</option>{' '}
+          <option value="الثاني/ثالث">الثاني/ثالث</option>{' '}
+          <option value="الثاني/رابع">الثاني/رابع</option>{' '}
+          <option value="الثاني/خامس">الثاني/خامس</option>{' '}
+          <option value="الثاني/سادس">الثاني/سادس</option>{' '}
+          <option value="الثاني/سابع">الثاني/سابع</option>
         </select>
       </section>
 
-      {/* Content Section Based on Dropdown Selection */}
       <section className={styles.content}>
-        {selectedSubject === '2-1' && <p>Content for 2-1...</p>}
-        {selectedSubject === '2-2' && <p>Content for 2-2...</p>}
-        {selectedSubject === '2-3' && <p>Content for 2-3...</p>}
-        {selectedSubject === '2-4' && <p>Content for 2-4...</p>}
-        {selectedSubject === '2-5' && <p>Content for 2-5...</p>}
-        {selectedSubject === '2-6' && <p>Content for 2-6...</p>}
-        {selectedSubject === '2-7' && <p>Content for 2-7...</p>}
-        <Link href="./first-year/marks/">
-          <h4>الذهاب الى درجات الصف الثاني</h4>
-        </Link>
+        {error && <p>{error}</p>}
+        {dataRows.length > 0 ? (
+          <table className={styles2.table}>
+            <thead>
+              <tr>
+                <th>FullName</th>
+                <th>Room</th>
+                <th>Course</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataRows.map((row, index) => (
+                <tr key={index}>
+                  <td>{row.FullName}</td>
+                  <td>{row.Room}</td>
+                  <td>{row.Course}</td>
+                  <td>{row.Total}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          !error && <p>No data available for the selected grade.</p>
+        )}
       </section>
 
-      {/* Footer Section */}
       <footer className={styles.footer}>
         <p>&copy; Your School Name 2024</p>
         <p>Prog/Ashraf Eltayb</p>
