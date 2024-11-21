@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/front.module.css';
 import Link from 'next/link';
 import Navbar from '../components/navbar';
+import AddContactForm from '../components/AddContactForm';
 
 export default function Home() {
   return (
@@ -11,6 +12,10 @@ export default function Home() {
         <title>Your School Name</title>
         <meta name="description" content="Your school website description" />
         <link rel="icon" href="/favicon.ico" />
+        <style>
+          @import
+          url(`https://fonts.googleapis.com/css2?family=Almarai:wght@700&family=Marhey:wght@300..700&display=swap`);
+        </style>
       </Head>
       <Navbar />
 
@@ -67,6 +72,7 @@ export default function Home() {
           width={500}
           height={400}
         />
+        <AddContactForm />
       </section>
 
       {/* Footer Section */}
