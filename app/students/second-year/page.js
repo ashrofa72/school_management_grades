@@ -79,10 +79,10 @@ export default function SecondYear() {
           <table className={styles2.table}>
             <thead>
               <tr>
-                <th>FullName</th>
-                <th>Room</th>
-                <th>Course</th>
-                <th>Total</th>
+                <th>اسم الطالبة</th>
+                <th>الصف</th>
+                <th>المادة</th>
+                <th>الدرجة</th>
               </tr>
             </thead>
             <tbody>
@@ -97,12 +97,13 @@ export default function SecondYear() {
             </tbody>
           </table>
         ) : (
-          !error && <p>No data available for the selected room.</p>
+          !error && <p>لا يوجد سجلات موجودة للصف المحدد</p>
         )}
       </section>
 
+      {/* Footer Section */}
       <footer className={styles.footer}>
-        <p>&copy; Your School Name 2024</p>
+        <p>&copy; 2024 فاطمة الزهراء الثانوية للبنات</p>
         <p>Prog/Ashraf Eltayb</p>
       </footer>
     </div>
