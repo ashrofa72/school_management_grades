@@ -8,15 +8,15 @@ import styles2 from '../../../styles/Table.module.css';
 import { useState, useEffect } from 'react';
 
 export default function SecondYear() {
-  const [selectedRoom, setSelectedRoom] = useState('2-1');
+  const [selectedSubject, setSelectedSubject] = useState('Biology');
   const [dataRows, setDataRows] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        console.log(`Fetching data for room: ${selectedRoom}`);
-        const response = await fetch(`/api/sheets?Room=${selectedRoom}`);
+        console.log(`Fetching data for grade: ${selectedSubject}`);
+        const response = await fetch(`/api/sheets?Room=${selectedSubject}`);
 
         // Log the entire response for debugging
         console.log('Fetch Response:', response);
@@ -37,10 +37,10 @@ export default function SecondYear() {
     }
 
     fetchData();
-  }, [selectedRoom]);
+  }, [selectedSubject]);
 
   const handleSelectChange = (event) => {
-    setSelectedRoom(event.target.value);
+    setSelectedSubject(event.target.value);
   };
 
   return (
@@ -61,15 +61,18 @@ export default function SecondYear() {
       </section>
 
       <section className={styles.dropdown}>
-        <label htmlFor="rooms">Choose a Room:</label>
-        <select id="rooms" value={selectedRoom} onChange={handleSelectChange}>
-          <option value="2-1">2-1</option>
-          <option value="2-2">2-2</option>
-          <option value="2-3">2-3</option>
-          <option value="2-4">2-4</option>
-          <option value="2-5">2-5</option>
-          <option value="2-6">2-6</option>
-          <option value="2-7">2-7</option>
+        <label htmlFor="subjects">Choose a Class:</label>
+        <select
+          id="subjects"
+          value={selectedSubject}
+          onChange={handleSelectChange}
+        >
+          <option value="Biology">Biology</option>{' '}
+          <option value="History">History</option>{' '}
+          <option value="English">English</option>{' '}
+          <option value="French">French</option>{' '}
+          <option value="Math2">Math2</option>{' '}
+          <option value="Arabic">Arabic</option>
         </select>
       </section>
 
@@ -97,12 +100,12 @@ export default function SecondYear() {
             </tbody>
           </table>
         ) : (
-          !error && <p>No data available for the selected room.</p>
+          !error && <p>No data available for the selected grade.</p>
         )}
       </section>
 
       <footer className={styles.footer}>
-        <p>&copy; Your School Name 2024</p>
+        <p>&copy;مدرسة فاطمة الزهراء الثانوية بنات 2024</p>
         <p>Prog/Ashraf Eltayb</p>
       </footer>
     </div>

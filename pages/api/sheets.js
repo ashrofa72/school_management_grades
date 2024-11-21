@@ -1,4 +1,3 @@
-// pages/api/sheets.js
 import { getSheetData } from '../../utils/sheets';
 
 export default async function handler(req, res) {
@@ -7,7 +6,7 @@ export default async function handler(req, res) {
       const { Room } = req.query;
 
       if (!Room) {
-        return res.status(400).json({ error: 'Grade is required' });
+        return res.status(400).json({ error: 'Room is required' });
       }
 
       const data = await getSheetData(Room);

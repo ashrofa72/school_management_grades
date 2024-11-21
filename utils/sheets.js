@@ -1,4 +1,3 @@
-// utils/sheets.js
 import { google } from 'googleapis';
 
 export async function getSheetData(Room) {
@@ -14,7 +13,7 @@ export async function getSheetData(Room) {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SPREADSHEET_ID,
-      range: `${Room}!A1:Z`,
+      range: 'Biology!A1:Z',
     });
 
     const rows = response.data.values;
@@ -33,7 +32,7 @@ export async function getSheetData(Room) {
         Course: row[columnMap['Course']],
         Total: row[columnMap['Total']],
       }))
-      .filter((row) => row.FullName && row.Room && row.Course && row.Total)
+      .filter((row) => row.Room === Room) // Correctly filter rows based on the Room parameter
       .sort((a, b) => a.FullName.localeCompare(b.FullName));
 
     return filteredAndSortedDataRows;
