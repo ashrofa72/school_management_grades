@@ -1,6 +1,6 @@
 import { google } from 'googleapis';
 
-export async function getSheetData(Room) {
+export async function getSheetData(Room, Subject) {
   try {
     const jwt = new google.auth.JWT(
       process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
@@ -13,10 +13,14 @@ export async function getSheetData(Room) {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SPREADSHEET_ID,
-      range: 'Biology!A1:Z',
+      range: 'NewPara!A1:Z', // Adjust range to your sheet
     });
 
     const rows = response.data.values;
+    if (!rows || rows.length === 0) {
+      throw new Error('No data found in the spreadsheet.');
+    }
+
     const headerRow = rows[0];
     const dataRows = rows.slice(1);
 
@@ -29,10 +33,12 @@ export async function getSheetData(Room) {
       .map((row) => ({
         FullName: row[columnMap['FullName']],
         Room: row[columnMap['Room']],
-        Course: row[columnMap['Course']],
+        Subject: row[columnMap['Subject']],
         Total: row[columnMap['Total']],
       }))
-      .filter((row) => row.Room === Room) // Correctly filter rows based on the Room parameter
+      .filter(
+        (row) => row.Room === Room && row.Subject === Subject // Filter by both Room and Subject
+      )
       .sort((a, b) => a.FullName.localeCompare(b.FullName));
 
     return filteredAndSortedDataRows;

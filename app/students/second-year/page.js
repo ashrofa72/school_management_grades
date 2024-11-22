@@ -1,7 +1,6 @@
-'use client'; // Add this at the very top of your file
+'use client';
 
 import Head from 'next/head';
-import Link from 'next/link';
 import Navbar from '../../../components/navbar';
 import styles from '../../../styles/FirstYear.module.css';
 import styles2 from '../../../styles/Table.module.css';
@@ -9,17 +8,19 @@ import { useState, useEffect } from 'react';
 
 export default function SecondYear() {
   const [selectedRoom, setSelectedRoom] = useState('2-1');
+  const [selectedSubject, setSelectedSubject] = useState('English');
   const [dataRows, setDataRows] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        console.log(`Fetching data for room: ${selectedRoom}`);
-        const response = await fetch(`/api/sheets?Room=${selectedRoom}`);
-
-        // Log the entire response for debugging
-        console.log('Fetch Response:', response);
+        console.log(
+          `Fetching data for Room: ${selectedRoom}, Subject: ${selectedSubject}`
+        );
+        const response = await fetch(
+          `/api/sheets?Room=${selectedRoom}&Subject=${selectedSubject}`
+        );
 
         if (!response.ok) {
           throw new Error(
@@ -37,10 +38,14 @@ export default function SecondYear() {
     }
 
     fetchData();
-  }, [selectedRoom]);
+  }, [selectedRoom, selectedSubject]);
 
-  const handleSelectChange = (event) => {
+  const handleRoomChange = (event) => {
     setSelectedRoom(event.target.value);
+  };
+
+  const handleSubjectChange = (event) => {
+    setSelectedSubject(event.target.value);
   };
 
   return (
@@ -60,9 +65,10 @@ export default function SecondYear() {
         <h1>طلاب الصف الثاني</h1>
       </section>
 
+      {/* Dropdown Section */}
       <section className={styles.dropdown}>
         <label htmlFor="rooms">Choose a Room:</label>
-        <select id="rooms" value={selectedRoom} onChange={handleSelectChange}>
+        <select id="rooms" value={selectedRoom} onChange={handleRoomChange}>
           <option value="2-1">2-1</option>
           <option value="2-2">2-2</option>
           <option value="2-3">2-3</option>
@@ -71,8 +77,21 @@ export default function SecondYear() {
           <option value="2-6">2-6</option>
           <option value="2-7">2-7</option>
         </select>
+
+        <label htmlFor="subjects">Choose a Subject:</label>
+        <select
+          id="subjects"
+          value={selectedSubject}
+          onChange={handleSubjectChange}
+        >
+          <option value="Math">Math</option>
+          <option value="Biology">Biology</option>
+          <option value="Arabic">Arabic</option>
+          <option value="English">English</option>
+        </select>
       </section>
 
+      {/* Data Table Section */}
       <section className={styles.content}>
         {error && <p>{error}</p>}
         {dataRows.length > 0 ? (
@@ -90,14 +109,14 @@ export default function SecondYear() {
                 <tr key={index}>
                   <td>{row.FullName}</td>
                   <td>{row.Room}</td>
-                  <td>{row.Course}</td>
+                  <td>{row.Subject}</td>
                   <td>{row.Total}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
-          !error && <p>لا يوجد سجلات موجودة للصف المحدد</p>
+          !error && <p>لا يوجد سجلات موجودة للصف والمادة المحددين</p>
         )}
       </section>
 
