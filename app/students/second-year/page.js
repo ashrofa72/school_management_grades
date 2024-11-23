@@ -67,28 +67,36 @@ export default function SecondYear() {
 
       {/* Dropdown Section */}
       <section className={styles.dropdown}>
-        <label htmlFor="rooms">Choose a Room:</label>
-        <select id="rooms" value={selectedRoom} onChange={handleRoomChange}>
-          <option value="2-1">2-1</option>
-          <option value="2-2">2-2</option>
-          <option value="2-3">2-3</option>
-          <option value="2-4">2-4</option>
-          <option value="2-5">2-5</option>
-          <option value="2-6">2-6</option>
-          <option value="2-7">2-7</option>
-        </select>
-
-        <label htmlFor="subjects">Choose a Subject:</label>
-        <select
-          id="subjects"
-          value={selectedSubject}
-          onChange={handleSubjectChange}
-        >
-          <option value="Math">Math</option>
-          <option value="Biology">Biology</option>
-          <option value="Arabic">Arabic</option>
-          <option value="English">English</option>
-        </select>
+        <div>
+          <label htmlFor="rooms">اختار الصف :</label>
+          <select id="rooms" value={selectedRoom} onChange={handleRoomChange}>
+            <option value="2-1">2-1</option>
+            <option value="2-2">2-2</option>
+            <option value="2-3">2-3</option>
+            <option value="2-4">2-4</option>
+            <option value="2-5">2-5</option>
+            <option value="2-6">2-6</option>
+            <option value="2-7">2-7</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="subjects">اختار المادة:</label>
+          <select
+            id="subjects"
+            value={selectedSubject}
+            onChange={handleSubjectChange}
+          >
+            <option value="Maths 1 Science">Maths 1 Science</option>
+            <option value="Biology">Biology</option>
+            <option value="Arabic">Arabic</option>
+            <option value="English First Language">
+              English First Language
+            </option>
+            <option value="Maths 1 Arts">Maths 1 Arts</option>
+            <option value="Mechanics">Mechanics</option>
+            <option value="Chemistry">Chemistry</option>
+          </select>
+        </div>
       </section>
 
       {/* Data Table Section */}
@@ -101,6 +109,8 @@ export default function SecondYear() {
                 <th>اسم الطالبة</th>
                 <th>الصف</th>
                 <th>المادة</th>
+                <th>كود الطالب</th>
+                <th>التاريخ</th>
                 <th>الدرجة</th>
               </tr>
             </thead>
@@ -110,6 +120,8 @@ export default function SecondYear() {
                   <td>{row.FullName}</td>
                   <td>{row.Room}</td>
                   <td>{row.Subject}</td>
+                  <td>{row.SISUserID}</td>
+                  <td>{row.StartDate}</td>
                   <td>{row.Total}</td>
                 </tr>
               ))}

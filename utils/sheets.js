@@ -13,7 +13,7 @@ export async function getSheetData(Room, Subject) {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SPREADSHEET_ID,
-      range: 'NewPara!A1:Z', // Adjust range to your sheet
+      range: 'combined_exams!A1:Z', // Adjust range to your sheet
     });
 
     const rows = response.data.values;
@@ -34,6 +34,8 @@ export async function getSheetData(Room, Subject) {
         FullName: row[columnMap['FullName']],
         Room: row[columnMap['Room']],
         Subject: row[columnMap['Subject']],
+        StartDate: row[columnMap['StartDate']],
+        SISUserID: row[columnMap['SISUserID']],
         Total: row[columnMap['Total']],
       }))
       .filter(

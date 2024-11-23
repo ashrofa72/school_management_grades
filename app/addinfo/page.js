@@ -40,7 +40,7 @@ const AddContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <label htmlFor="name">Name:</label>
+      <label htmlFor="name">الإسم:</label>
       <input
         type="text"
         id="name"
@@ -51,7 +51,7 @@ const AddContactForm = () => {
       <br />
       <br />
 
-      <label htmlFor="address">Address:</label>
+      <label htmlFor="address">العنوان:</label>
       <input
         type="text"
         id="address"
@@ -62,7 +62,7 @@ const AddContactForm = () => {
       <br />
       <br />
 
-      <label htmlFor="phoneNumber">Phone Number:</label>
+      <label htmlFor="phoneNumber">رقم التليفون:</label>
       <input
         type="text"
         id="phoneNumber"

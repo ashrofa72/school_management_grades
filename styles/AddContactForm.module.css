@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@700&family=Marhey:wght@300..700&display=swap');
+
 .form {
   max-width: 400px;
   margin: 0 auto;
@@ -6,14 +8,19 @@
   border-radius: 8px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  font-family: Marhey, sans-serif;
 }
 
+.form h1 {
+  font-weight: bold;
+  text-align: center;
+}
 .form label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
   color: #333;
+  direction: rtl;
 }
 
 .form input[type='text'],

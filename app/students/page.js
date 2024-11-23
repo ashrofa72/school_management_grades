@@ -26,6 +26,7 @@ export default function Students() {
           <h2>طلاب الصف الأول</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit....</p>
           <Image
+            className={styles.info}
             src="/images/first.jpg"
             alt="First Year Image"
             width={300}
@@ -40,6 +41,7 @@ export default function Students() {
           <h2>طلاب الصف الثاني</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit....</p>
           <Image
+            className={styles.info}
             src="/images/second.jpg"
             alt="Second Year Image"
             width={300}

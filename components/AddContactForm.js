@@ -51,7 +51,8 @@ const AddContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <label htmlFor="name">Name:</label>
+      <h1>ادخل بياناتك للأحداث القادمة</h1>
+      <label htmlFor="name">الإسم:</label>
       <input
         type="text"
         id="name"
@@ -61,7 +62,7 @@ const AddContactForm = () => {
         disabled={isSubmitting}
       />
 
-      <label htmlFor="address">Address:</label>
+      <label htmlFor="address">العنوان:</label>
       <input
         type="text"
         id="address"
@@ -71,7 +72,7 @@ const AddContactForm = () => {
         disabled={isSubmitting}
       />
 
-      <label htmlFor="phoneNumber">Phone Number:</label>
+      <label htmlFor="phoneNumber">رقم التليفون:</label>
       <input
         type="text"
         id="phoneNumber"

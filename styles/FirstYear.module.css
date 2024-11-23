@@ -25,7 +25,13 @@
 
 .dropdown {
   margin: 20px 0;
-  text-align: center;
+  display: flex; /* Display items in a row */
+  justify-content: center; /* Center items horizontally */
+}
+
+.dropdown div {
+  margin: 0 10px; /* Add horizontal space between the dropdown menus */
+  direction: rtl;
 }
 
 .dropdown label {

@@ -6,7 +6,7 @@
   padding: 20px;
   font-family: Arial, sans-serif;
   direction: ltr; /* Ensures left-to-right direction */
-  text-align: right;
+  text-align: center; /* Centers text globally, adjust as needed */
   font-family: 'Marhey', sans-serif;
 }
 
@@ -25,7 +25,7 @@
 
 .info {
   padding: 40px 20px;
-  margin: 20px 0;
+  margin: 20px auto; /* Centers the info section within the container */
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -52,6 +52,9 @@
   max-width: 100%;
   height: auto;
   border-radius: 8px;
+  display: block; /* Ensures it acts like a block-level element */
+  margin-left: auto; /* Centers horizontally */
+  margin-right: auto; /* Centers horizontally */
 }
 
 .footer {
