@@ -4,13 +4,14 @@ import Head from 'next/head';
 import Navbar from '../../../components/navbar';
 import styles from '../../../styles/FirstYear.module.css';
 import styles2 from '../../../styles/Table.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function SecondYear() {
   const [selectedRoom, setSelectedRoom] = useState('2-1');
-  const [selectedSubject, setSelectedSubject] = useState('English');
+  const [selectedSubject, setSelectedSubject] = useState('Biology');
   const [dataRows, setDataRows] = useState([]);
   const [error, setError] = useState(null);
+  const tableRef = useRef(); // Reference to the table for printing
 
   useEffect(() => {
     async function fetchData() {
@@ -48,6 +49,49 @@ export default function SecondYear() {
     setSelectedSubject(event.target.value);
   };
 
+  const handlePrint = () => {
+    const printContent = tableRef.current.innerHTML;
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Print</title>
+          <style>
+            /* Custom print styles */
+            @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@700&family=Marhey:wght@300..700&display=swap');
+            body {
+              font-family: Marhey, sans-serif;
+           
+            }
+              h1{
+                 direction:rtl;
+                 font-size: 15px;
+                 text-align:right;
+              }
+            table {
+              border-collapse: collapse;
+              width: 100%;
+              direction:rtl;
+              font-family: Marhey, sans-serif;
+              font-size: 10px;
+            }
+            th, td {
+              border: 1px solid black;
+              padding: 8px;
+              text-align: center;
+            }
+          </style>
+        </head>
+        <body>
+         <h1 >المادة: ${selectedSubject}</h1> <!-- Display selected subject -->
+          ${printContent}
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -58,13 +102,10 @@ export default function SecondYear() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Navbar />
-
       <section className={styles.header}>
         <h1>طلاب الصف الثاني</h1>
       </section>
-
       {/* Dropdown Section */}
       <section className={styles.dropdown}>
         <div>
@@ -86,52 +127,60 @@ export default function SecondYear() {
             value={selectedSubject}
             onChange={handleSubjectChange}
           >
-            <option value="Maths 1 Science">Maths 1 Science</option>
             <option value="Biology">Biology</option>
+            <option value="Maths 1 Science">Maths 1 Science</option>
             <option value="Arabic">Arabic</option>
             <option value="English First Language">
               English First Language
             </option>
             <option value="Maths 1 Arts">Maths 1 Arts</option>
-            <option value="Mechanics">Mechanics</option>
+            <option value="Maths 2">Maths 2</option>
             <option value="Chemistry">Chemistry</option>
           </select>
         </div>
       </section>
-
       {/* Data Table Section */}
       <section className={styles.content}>
         {error && <p>{error}</p>}
         {dataRows.length > 0 ? (
-          <table className={styles2.table}>
-            <thead>
-              <tr>
-                <th>اسم الطالبة</th>
-                <th>الصف</th>
-                <th>المادة</th>
-                <th>كود الطالب</th>
-                <th>التاريخ</th>
-                <th>الدرجة</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dataRows.map((row, index) => (
-                <tr key={index}>
-                  <td>{row.FullName}</td>
-                  <td>{row.Room}</td>
-                  <td>{row.Subject}</td>
-                  <td>{row.SISUserID}</td>
-                  <td>{row.StartDate}</td>
-                  <td>{row.Total}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div>
+            <button
+              className={`${styles2.printButton}`}
+              onClick={handlePrint} // Print button
+            >
+              طباعة الجدول
+            </button>
+            <div ref={tableRef}>
+              <table className={styles2.table}>
+                <thead>
+                  <tr>
+                    <th>اسم الطالبة</th>
+                    <th>الصف</th>
+                    <th>المادة</th>
+                    <th>كود الطالب</th>
+                    <th>التاريخ</th>
+                    <th>الدرجة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {dataRows.map((row, index) => (
+                    <tr key={index}>
+                      <td>{row.FullName}</td>
+                      <td>{row.Room}</td>
+                      <td>{row.Subject}</td>
+                      <td>{row.SISUserID}</td>
+                      <td>{row.StartDate}</td>
+                      <td>{row.Total}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         ) : (
           !error && <p>لا يوجد سجلات موجودة للصف والمادة المحددين</p>
         )}
       </section>
-
       {/* Footer Section */}
       <footer className={styles.footer}>
         <p>&copy; 2024 فاطمة الزهراء الثانوية للبنات</p>
