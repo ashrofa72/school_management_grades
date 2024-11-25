@@ -55,7 +55,7 @@ export default function SecondYear() {
     printWindow.document.write(`
       <html>
         <head>
-          <title>Print</title>
+          <title>${selectedSubject} كشف درجات</title>
           <style>
             /* Custom print styles */
             @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@700&family=Marhey:wght@300..700&display=swap');

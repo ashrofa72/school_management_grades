@@ -51,7 +51,7 @@ export default function Home() {
       {/* Students Section */}
       <Link href="/students">
         <section className={styles.section}>
-          <h2>طالبات المدرسة</h2>
+          <h2>طلاب المدرسة</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit....</p>
           <Image
             src="/images/solutions-overview-1@2x.png"
