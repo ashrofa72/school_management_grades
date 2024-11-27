@@ -54,6 +54,9 @@ export default function Scanner() {
   };
 
   const handleSave = async () => {
+    // Get current date and time
+    const timestamp = new Date().toISOString(); // ISO format ensures consistency
+
     const response = await fetch('/api/saveData', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -62,6 +65,7 @@ export default function Scanner() {
         imei,
         FullName: selectedStudent?.value,
         room: selectedRoom?.value,
+        timestamp, // Include timestamp in the payload
       }),
     });
 

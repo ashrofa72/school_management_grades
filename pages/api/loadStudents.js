@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     const sheets = google.sheets({ version: 'v4', auth });
 
     const spreadsheetId = '10BzoAxaSy-qnD95M51MsH2hYVen26bBQ97VbVkiyhDM';
-    const range = 'StudentsData!A:B'; // Assuming FullName is in column A, and room in column B
+    const range = 'FirstStudentsData!A:B'; // Assuming FullName is in column A, and room in column B
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,

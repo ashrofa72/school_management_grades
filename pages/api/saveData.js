@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { serialNumber, imei, FullName, room } = req.body;
+    const { serialNumber, imei, FullName, room, timestamp } = req.body; // Receive timestamp
 
     const auth = new google.auth.GoogleAuth({
       credentials: {
@@ -21,15 +21,16 @@ export default async function handler(req, res) {
 
     const sheets = google.sheets({ version: 'v4', auth });
 
-    const spreadsheetId = 'YOUR_SPREADSHEET_ID';
-    const range = 'ScannerData!A:D';
+    const spreadsheetId = '10BzoAxaSy-qnD95M51MsH2hYVen26bBQ97VbVkiyhDM';
+    const range = 'ScannerData!A:E'; // Update range to include the timestamp column
 
+    // Append the timestamp along with other data
     await sheets.spreadsheets.values.append({
       spreadsheetId,
       range,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
-        values: [[serialNumber, imei, FullName, room]],
+        values: [[timestamp, serialNumber, imei, FullName, room]],
       },
     });
 

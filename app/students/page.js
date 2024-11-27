@@ -24,7 +24,10 @@ export default function Students() {
       <Link href="/students/first-year">
         <section id="first-year" className={styles.gradeSection}>
           <h2>طلاب الصف الأول</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit....</p>
+          <Link href="/scanner/" legacyBehavior>
+            <span>الذهاب الى نموذج التابلت</span>
+          </Link>
+
           <Image
             className={styles.info}
             src="/images/first.jpg"
