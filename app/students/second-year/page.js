@@ -93,99 +93,102 @@ export default function SecondYear() {
   };
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>طلاب الصف الثاني</title>
-        <meta
-          name="description"
-          content="Information about second year students"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div>
       <Navbar />
-      <section className={styles.header}>
-        <h1>طلاب الصف الثاني</h1>
-      </section>
-      {/* Dropdown Section */}
-      <section className={styles.dropdown}>
-        <div>
-          <label htmlFor="rooms">اختار الصف :</label>
-          <select id="rooms" value={selectedRoom} onChange={handleRoomChange}>
-            <option value="2-1">2-1</option>
-            <option value="2-2">2-2</option>
-            <option value="2-3">2-3</option>
-            <option value="2-4">2-4</option>
-            <option value="2-5">2-5</option>
-            <option value="2-6">2-6</option>
-            <option value="2-7">2-7</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="subjects">اختار المادة:</label>
-          <select
-            id="subjects"
-            value={selectedSubject}
-            onChange={handleSubjectChange}
-          >
-            <option value="Biology">Biology</option>
-            <option value="Maths 1 Science">Maths 1 Science</option>
-            <option value="Arabic">Arabic</option>
-            <option value="English First Language">
-              English First Language
-            </option>
-            <option value="Maths 1 Arts">Maths 1 Arts</option>
-            <option value="Maths 2">Maths 2</option>
-            <option value="Chemistry">Chemistry</option>
-          </select>
-        </div>
-      </section>
-      {/* Data Table Section */}
-      <section className={styles.content}>
-        {error && <p>{error}</p>}
-        {dataRows.length > 0 ? (
+      <div className={styles.container}>
+        <Head>
+          <title>طلاب الصف الثاني</title>
+          <meta
+            name="description"
+            content="Information about second year students"
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+
+        <section className={styles.header}>
+          <h1>طلاب الصف الثاني</h1>
+        </section>
+        {/* Dropdown Section */}
+        <section className={styles.dropdown}>
           <div>
-            <button
-              className={`${styles2.printButton}`}
-              onClick={handlePrint} // Print button
-            >
-              طباعة الجدول
-            </button>
-            <div ref={tableRef}>
-              <table className={styles2.table}>
-                <thead>
-                  <tr>
-                    <th>اسم الطالبة</th>
-                    <th>الصف</th>
-                    <th>المادة</th>
-                    <th>كود الطالب</th>
-                    <th>التاريخ</th>
-                    <th>الدرجة</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dataRows.map((row, index) => (
-                    <tr key={index}>
-                      <td>{row.FullName}</td>
-                      <td>{row.Room}</td>
-                      <td>{row.Subject}</td>
-                      <td>{row.SISUserID}</td>
-                      <td>{row.StartDate}</td>
-                      <td>{row.Total}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <label htmlFor="rooms">اختار الصف :</label>
+            <select id="rooms" value={selectedRoom} onChange={handleRoomChange}>
+              <option value="2-1">2-1</option>
+              <option value="2-2">2-2</option>
+              <option value="2-3">2-3</option>
+              <option value="2-4">2-4</option>
+              <option value="2-5">2-5</option>
+              <option value="2-6">2-6</option>
+              <option value="2-7">2-7</option>
+            </select>
           </div>
-        ) : (
-          !error && <p>لا يوجد سجلات موجودة للصف والمادة المحددين</p>
-        )}
-      </section>
-      {/* Footer Section */}
-      <footer className={styles.footer}>
-        <p>&copy; 2024 فاطمة الزهراء الثانوية للبنات</p>
-        <p>Prog/Ashraf Eltayb</p>
-      </footer>
+          <div>
+            <label htmlFor="subjects">اختار المادة:</label>
+            <select
+              id="subjects"
+              value={selectedSubject}
+              onChange={handleSubjectChange}
+            >
+              <option value="Biology">Biology</option>
+              <option value="Maths 1 Science">Maths 1 Science</option>
+              <option value="Arabic">Arabic</option>
+              <option value="English First Language">
+                English First Language
+              </option>
+              <option value="Maths 1 Arts">Maths 1 Arts</option>
+              <option value="Maths 2">Maths 2</option>
+              <option value="Chemistry">Chemistry</option>
+            </select>
+          </div>
+        </section>
+        {/* Data Table Section */}
+        <section className={styles.content}>
+          {error && <p>{error}</p>}
+          {dataRows.length > 0 ? (
+            <div>
+              <button
+                className={`${styles2.printButton}`}
+                onClick={handlePrint} // Print button
+              >
+                طباعة الجدول
+              </button>
+              <div ref={tableRef}>
+                <table className={styles2.table}>
+                  <thead>
+                    <tr>
+                      <th>اسم الطالبة</th>
+                      <th>الصف</th>
+                      <th>المادة</th>
+                      <th>كود الطالب</th>
+                      <th>التاريخ</th>
+                      <th>الدرجة</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dataRows.map((row, index) => (
+                      <tr key={index}>
+                        <td>{row.FullName}</td>
+                        <td>{row.Room}</td>
+                        <td>{row.Subject}</td>
+                        <td>{row.SISUserID}</td>
+                        <td>{row.StartDate}</td>
+                        <td>{row.Total}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ) : (
+            !error && <p>لا يوجد سجلات موجودة للصف والمادة المحددين</p>
+          )}
+        </section>
+        {/* Footer Section */}
+        <footer className={styles.footer}>
+          <p>&copy; 2024 فاطمة الزهراء الثانوية للبنات</p>
+          <p>Prog/Ashraf Eltayb</p>
+        </footer>
+      </div>
     </div>
   );
 }
